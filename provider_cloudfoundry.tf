@@ -9,10 +9,16 @@ data "cloudfoundry_org" "my_org" {
   name = "bercheg-org"
 }
 
+resource "cloudfoundry_user" "demo-user" {
+  name = "demo@mydomain.com"
+  password = "this-account-wont-last-long"
+}
+
 resource "cloudfoundry_space" "my_space" {
   name = "demo-basel"
   org = "${data.cloudfoundry_org.my_org.id}"
   developers = [
+    "${cloudfoundry_user.demo-user.id}",
     //PWS does not allow to lookup users by email, even ourselves
     //"${data.cloudfoundry_user.myself.id}",
     "526cc2f7-3d07-4e04-85b2-e3c96282541c"
