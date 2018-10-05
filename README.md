@@ -5,8 +5,8 @@ This repo supports demo of the [terraform-provider-cloudfoundry](https://github.
 
 ## Install terraform and provider
 
-sh
-```
+
+```sh
 curl -LO https://releases.hashicorp.com/terraform/0.11.8/terraform_0.11.8_linux_amd64.zip
 unzip terraform_0.11.8_linux_amd64.zip
 #add binary to your path
@@ -24,8 +24,8 @@ Install the [hashicorp-terraform--hcl-language-support](https://plugins.jetbrain
 
 Install the schema for the terraform-provider-cloudfoundry (temporary step until the provider becomes official, see https://github.com/VladRassokhin/intellij-hcl/issues/128)
 
-sh
-```
+
+```sh
 mkdir -p $HOME/terraform.d/schemas
 cp cloudfoundry.json $HOME/terraform.d/schemas 
 ```
