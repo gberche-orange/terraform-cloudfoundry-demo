@@ -17,7 +17,7 @@ data "cloudfoundry_org" "my_org" {
   name = "bercheg-org"
 }
 
-resource "cloudfoundry_space" "my_space" {
+resource "cloudfoundry_space" "demo-basel" {
   name = "demo-basel"
   org = "${data.cloudfoundry_org.my_org.id}"
   developers = [
@@ -42,11 +42,32 @@ data "cloudfoundry_service" "elephantsql" {
 resource "cloudfoundry_service_instance" "my_mysql" {
   name = "my_mysql"
   service_plan = "${data.cloudfoundry_service.elephantsql.service_plans["turtle"]}"
-  space = "${cloudfoundry_space.my_space.id}"
+  space = "${cloudfoundry_space.demo-basel.id}"
 }
 
+data "cloudfoundry_domain" "default_domain" {
+  name = "cfapps.io"
+}
 
+resource "cloudfoundry_route" "dora-tf-demo" {
+  domain = "${data.cloudfoundry_domain.default_domain.id}"
+  space = "${cloudfoundry_space.demo-basel.id}"
+  hostname = "dora-tf-demo"
+}
 
+resource "cloudfoundry_app" "dora" {
+  name = "dora"
+  space = "${cloudfoundry_space.demo-basel.id}"
+  route {
+    default_route = "${cloudfoundry_route.dora-tf-demo.id}"
+  }
+
+  #app is vendored in the repo, alternative to fetch it remotely
+  url = "file://./dora"
+  service_binding {
+    service_instance = "${cloudfoundry_service_instance.my_mysql.id}"
+  }
+}
 
 
 
