@@ -27,7 +27,7 @@ resource "cloudfoundry_space" "demo-basel" {
     //Refering to an existing user by its guid
     "526cc2f7-3d07-4e04-85b2-e3c96282541c"
     //workaround is to fetch guid from CF CLI:
-    //CF_TRACE=true cf org-users bercheg-org | grep -B10 '"username": "bercheg"' | grep '"guid"'
+    //CF_TRACE=true cf org-users bercheg-org | grep -B10 '"username": "bercheg' | grep '"guid"'
 
     // PWS does not allow for users creation using CC API, requires webui UX
     //    "${cloudfoundry_user.demo-user.id}",
