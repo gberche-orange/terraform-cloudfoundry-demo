@@ -1,14 +1,13 @@
 provider "cloudfoundry" {
   api_url             = "https://api.run.pivotal.io"
-  user                = "${var.tf_cf_login}"
-  password            = "${var.tf_cf_password}"
-  skip_ssl_validation = true
+  user                = "${var.user}"
+  password            = "${var.password}"
 }
 
-//variable "tf_cf_password" {
+//variable "user" {
 //  default="redacted"
 //}
-//variable "tf_cf_login" {
+//variable "password" {
 //  default="bercheg@redacted.com"
 //}
 
